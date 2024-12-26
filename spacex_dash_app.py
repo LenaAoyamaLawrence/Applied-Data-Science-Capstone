@@ -57,7 +57,9 @@ def get_pie_chart(entered_site):
 def update_output (selected_site, selected_payload):
 
        if selected_site == 'ALL':
-            fig = px.scatter(spacex_df, x = 'Payload Mass (kg)', y = 'class', color = 'Booster Version Category')
+            payload_df = spacex_df[spacex_df['Payload Mass (kg)'] >= selected_payload[0]]
+            payload_df = spacex_df[spacex_df['Payload Mass (kg)'] <= selected_payload[1]]
+            fig = px.scatter(payload_df, x = 'Payload Mass (kg)', y = 'class', color = 'Booster Version Category')
             return fig
        else:
             selected_df = spacex_df[spacex_df['Launch Site'] == selected_site]
